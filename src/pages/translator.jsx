@@ -12,6 +12,8 @@ const Translator = () => {
   const [fromLanguage, setFromLanguage] = useState('');
   const [toLanguage, setToLanguage] = useState('');
   const [text, setText] = useState('');
+  const [sourceDirection, setSourceDirection] = useState('ltr'); // Direction for source
+  const [targetDirection, setTargetDirection] = useState('ltr');
   const [translatedText, setTranslatedText] = useState('');
   const handleInputChange = (e) => {
     setText(e.target.value);
@@ -53,14 +55,17 @@ const Translator = () => {
             <LanguageSelector
              selectedLanguage={fromLanguage}
              setSelectedLanguage={setFromLanguage}
+             setDirection={setSourceDirection}
             />
             <LanguageSelector
             selectedLanguage={toLanguage}
             setSelectedLanguage={setToLanguage}
+            setDirection={setTargetDirection}
             />
           </section>
           <Textarea placeholder="متن اصلی" 
           value={text} onChange={handleInputChange}
+          direction={sourceDirection} 
           />
           <div>
             <Button label="ترجمه"  onClick={handleTranslation}/>
@@ -69,6 +74,7 @@ const Translator = () => {
         <section>
           <Textarea placeholder="ترجمه شده" 
           value={translatedText} 
+          direction={targetDirection}
           readOnly 
           />
         </section>

@@ -1,12 +1,21 @@
 import React from 'react';
 
-const LanguageSelector = ({ selectedLanguage, setSelectedLanguage }) => {
+const LanguageSelector = ({ selectedLanguage, setSelectedLanguage, setDirection  }) => {
+  const isRtlLanguage = (langCode) => {
+    const rtlLanguages = ['ar', 'he', 'fa', 'ur'];
+    return rtlLanguages.includes(langCode);
+  };
+  const handleLanguageChange = (e) => {
+    const selectedLang = e.target.value;
+    setSelectedLanguage(selectedLang);
+    setDirection(isRtlLanguage(selectedLang) ? 'rtl' : 'ltr'); // Set direction based on language
+  };
   return (
     <select 
       name="languages" 
       id="languages" 
       value={selectedLanguage} 
-      onChange={(e) => setSelectedLanguage(e.target.value)}
+      onChange={handleLanguageChange}
       className='px-5 py-2 border rounded-3xl'
     >
       <option value="" disabled>انتخاب زبان</option>
